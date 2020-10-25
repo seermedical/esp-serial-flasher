@@ -53,7 +53,7 @@ static const uint32_t UART_DATE_REG2_ADDR = 0x3f400074;   // used to differentia
 
 static const uint32_t DEFAULT_TIMEOUT = 500;
 static const uint32_t DEFAULT_FLASH_TIMEOUT = 3000;       // timeout for most flash operations
-static const uint32_t ERASE_REGION_TIMEOUT_PER_MB = 3000; // timeout (per megabyte) for erasing a region
+static const uint32_t ERASE_REGION_TIMEOUT_PER_MB = 10000; // timeout (per megabyte) for erasing a region
 static const uint8_t  PADDING_PATTERN = 0xFF;
 
 static uint32_t s_flash_write_size = 0;
@@ -218,8 +218,8 @@ static esp_loader_error_t spi_set_data_lengths(size_t mosi_bits, size_t miso_bit
 
 static esp_loader_error_t spi_flash_command(spi_flash_cmd_t cmd, void *data_tx, size_t tx_size, void *data_rx, size_t rx_size)
 {
-    assert(rx_size <= 32); // Reading more than 32 bits back from a SPI flash operation is unsupported
-    assert(tx_size <= 64); // Writing more than 64 bytes of data with one SPI command is unsupported
+    //assert(rx_size <= 32); // Reading more than 32 bits back from a SPI flash operation is unsupported
+    //assert(tx_size <= 64); // Writing more than 64 bytes of data with one SPI command is unsupported
 
     uint32_t SPI_USR_CMD  = (1 << 31);
     uint32_t SPI_USR_MISO = (1 << 28);
